@@ -5,17 +5,19 @@ import flask
 
 # Get current versions
 sk_version = sklearn.__version__
+joblib_version = joblib.__version__
+pd_version = pd.__version__
+flask_version = "3.1.3" # Pinning to a stable version known to be in Colab
 
-print(f"Current scikit-learn version: {sk_version}")
-
-# Generate precise requirements.txt
-new_requirements = f"""
-flask=={flask.__version__}
-joblib=={joblib.__version__}
-pandas=={pd.__version__}
+# Generate correct requirements.txt format
+correct_requirements = f"""flask=={flask_version}
+joblib=={joblib_version}
+pandas=={pd_version}
 scikit-learn=={sk_version}
-gunicorn
-"""
+gunicorn"""
 
 with open('requirements.txt', 'w') as f:
-    f.write(new_requirements.strip())
+    f.write(correct_requirements.strip())
+
+print("Corrected requirements.txt created with the following content:")
+print(correct_requirements.strip())
