@@ -1,5 +1,21 @@
-flask
-joblib
-pandas
-scikit-learn
+import sklearn
+import joblib
+import pandas as pd
+import flask
+
+# Get current versions
+sk_version = sklearn.__version__
+
+print(f"Current scikit-learn version: {sk_version}")
+
+# Generate precise requirements.txt
+new_requirements = f"""
+flask=={flask.__version__}
+joblib=={joblib.__version__}
+pandas=={pd.__version__}
+scikit-learn=={sk_version}
 gunicorn
+"""
+
+with open('requirements.txt', 'w') as f:
+    f.write(new_requirements.strip())
